@@ -21,7 +21,6 @@ public class AssignmentDeleteLead {
 		
 		WebElement elementPassword = driver.findElement(By.id("password"));
 		elementPassword.sendKeys("crmsfa");
-		
 
 		WebElement elementLogin = driver.findElement(By.className("decorativeSubmit"));
 		elementLogin.click();
@@ -41,14 +40,25 @@ public class AssignmentDeleteLead {
 		WebElement elementPhoneNumber = driver.findElement(By.xpath("//input[@name='phoneNumber']"));
 		elementPhoneNumber.sendKeys("98");
 		
-		Thread.sleep(2000);
-		
 		WebElement elementFindLeadButton = driver.findElement(By.xpath("//button[text()='Find Leads']"));
 		elementFindLeadButton.click();
 		
-		//want somemore time to complete
+		Thread.sleep(2000);
 		
-		//how to get the value of the 1st search lead
-	}
+		String text = driver.findElement(By.xpath("(//a[@class='linktext'])[4]")).getText();
+		System.out.println("lead ID : "+text);
+		driver.findElement(By.xpath("(//a[@class='linktext'])[4]")).click();
+		
+		driver.findElement(By.xpath("//a[@class='subMenuButtonDangerous']")).click();
+		driver.findElement(By.xpath("//a[text()='Find Leads']")).click();
+		driver.findElement(By.xpath("(//input[@type='text'])[29]")).sendKeys(text);
+		driver.findElement(By.xpath("//button[text()='Find Leads']")).click();
+
+		Thread.sleep(2000);
+		
+		String text2 = driver.findElement(By.xpath("//div[text()='No records to display']")).getText();
+		System.out.println("successful deletion : "+text2);
+		driver.quit();
+		}
 
 }
